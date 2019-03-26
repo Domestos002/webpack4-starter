@@ -6,6 +6,19 @@ const autoprefixer = require('autoprefixer');
 
 module.exports = function(env, argv){
   const environment = argv.mode;
+  const entries = ['index'];
+  const html = entries.map(entryName => {
+      return new HtmlWebPackPlugin({
+        template: `./src/index.twig`,
+        filename: `index.html`
+      })
+  });
+  const css = entries.map(entryName => {
+      return new MiniCssExtractPlugin({
+        filename: "[name].css",
+        chunkFilename: "[id].css"
+      })
+  });
   return {
     module: { 
       rules: [
@@ -66,19 +79,6 @@ module.exports = function(env, argv){
       ],
     },
     stats: 'errors-only',
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-        'process.env.DEBUG': JSON.stringify(process.env.DEBUG)
-      }),
-      new HtmlWebPackPlugin({
-        template: "./src/index.twig",
-        filename: "index.html"
-      }),
-      new MiniCssExtractPlugin({
-        filename: "[name].css",
-        chunkFilename: "[id].css"
-      })
-    ]
+    plugins: [...html, ...css]
   }
 };
