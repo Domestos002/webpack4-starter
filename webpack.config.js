@@ -65,12 +65,15 @@ module.exports = function(env, argv){
       }
     ]
   },
-  stats: 'errors-only',
+  stats: {
+    warnings: false,
+    children: false
+  },
+  // devServer: {
+  //   contentBase: './dist', 
+  //   hot: true
+  // },   
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      'process.env.DEBUG': JSON.stringify(process.env.DEBUG)
-    }),
     new HtmlWebPackPlugin({
       template: "./src/index.twig",
       filename: "index.html"
@@ -78,7 +81,8 @@ module.exports = function(env, argv){
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
-    })
+    }),
+    // new webpack.HotModuleReplacementPlugin()
   ]
 }
 };
