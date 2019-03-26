@@ -10,7 +10,7 @@ module.exports = function (env, argv) {
     const html = entries.map(entryName => {
         return new HtmlWebPackPlugin({
             filename: environment === 'production' ? `./dist/${entryName}.html` : `${entryName}.html`,
-            template: `./src/${entryName}.twig`,
+            template: `./src/pages/${entryName}/${entryName}.twig`,
         })
     });
     const css = new MiniCssExtractPlugin({
@@ -19,7 +19,7 @@ module.exports = function (env, argv) {
     });
 
     const entryOptions = entries.map(entryName => {
-        return `./src/${entryName}.js`
+        return `./src/pages/${entryName}/${entryName}.js`
     });
 
     return {

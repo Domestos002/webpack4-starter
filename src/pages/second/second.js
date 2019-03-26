@@ -1,4 +1,4 @@
-import style from "./sass/second.sass";
+import style from "./second.sass";
 
 const shiiit = ['qdw', 'qwd']
 console.log(shiiit)
