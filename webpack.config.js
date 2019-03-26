@@ -9,7 +9,7 @@ module.exports = function (env, argv) {
     const entries = ['index', 'second'];
     const html = entries.map(entryName => {
         return new HtmlWebPackPlugin({
-            filename: `${entryName}.html`,
+            filename: environment === 'production' ? `./dist/${entryName}.html` : `${entryName}.html`,
             template: `./src/${entryName}.twig`,
         })
     });
@@ -65,17 +65,23 @@ module.exports = function (env, argv) {
                             loader: 'postcss-loader',
                             options: {
                                 plugins: () => {
-                                    return environment === 'production' ? [autoprefixer, cssnano] : [autoprefixer];
+                                    return environment === 'production'
+                                        ? [autoprefixer, cssnano]
+                                        : [autoprefixer];
                                 },
                                 sourceMap: true
                             }
+                        },
+                        {
+                            loader: "group-css-media-queries-loader",
+                            options: { sourceMap: true }
                         },
                         {
                             loader: 'sass-loader',
                             options: {
                                 sourceMap: true
                             }
-                        }
+                        },
                     ]
                 }
             ],
