@@ -80,7 +80,7 @@ module.exports = function(env, argv){
         }
       ],
     },
-    entry: {  
+    entry: {   
       app: './src/index.js',
       second: './src/second.js'
     },
