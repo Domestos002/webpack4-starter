@@ -1,4 +1,4 @@
-// import style from "./sass/index.sass";
+import style from "./sass/index.sass";
 
 const arr = [1, 2, 3];
 const iAmJavascriptES6 = () => console.log(...arr);
