@@ -17,11 +17,8 @@ module.exports = function(env, argv){
         }
       },
      {
-          test: /\.twig$/,
-          loader: "twig-loader",
-          options: {
-            minimize: true
-          },
+        test: /\.twig$/,
+        use:['html-loader','twig-html-loader']
       },
       {
         test: /\.(png|jpe?g)/i,
